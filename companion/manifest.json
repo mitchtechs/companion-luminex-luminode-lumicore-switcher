@@ -1,6 +1,6 @@
 {
     "$schema": "../node_modules/@companion-module/base/assets/manifest.schema.json",
-    "id": "luminex-luminode-lumicore-switcher",
+    "id": "pda-luminex-luminode-lumicore-switcher",
     "name": "Luminex LumiNode / LumiCore Input Switcher",
     "shortname": "LumiSwitch",
     "description": "Switch input sources on Luminex LumiNode and LumiCore process engines via Art-Net control channel.",
