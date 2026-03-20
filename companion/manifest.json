@@ -40,5 +40,18 @@
         "LumiNode",
         "LumiCore",
         "Switcher"
-    ]
+    ],
+    "bonjourQueries": {
+        "luminode_host": [
+            {
+                "type": "_http",
+                "protocol": "tcp",
+                "port": 80
+            },
+            {
+                "type": "luminex",
+                "protocol": "tcp"
+            }
+        ]
+    }
 }

@@ -45,19 +45,32 @@ export class ModuleInstance extends InstanceBase<ModuleConfig> {
 		UpdatePresets(this)
 	}
 
+	private getHostAddress(): string | null {
+		if (!this.config) return null
+		if (this.config.luminode_host) {
+			const ip = this.config.luminode_host.split(':')[0]
+			const regex = /^(?:(?:25[0-5]|2[0-4]\d|[01]?\d\d?)\.){3}(?:25[0-5]|2[0-4]\d|[01]?\d\d?)$/
+			if (regex.test(ip)) return ip
+			this.log('warn', `Bonjour host IP "${ip}" has unexpected format`)
+			return null
+		}
+		return this.config.host || null
+	}
+
 	private startArtNet(): void {
-		if (!this.config?.host) {
+		const host = this.getHostAddress()
+		if (!host) {
 			this.updateStatus(InstanceStatus.BadConfig, 'No target IP configured')
 			return
 		}
 
 		this.artnet = new ArtNetSender(
-			this.config.host,
-			this.config.universe ?? 0,
-			this.config.subnet ?? 0,
-			this.config.net ?? 0,
+			host,
+			this.config?.universe ?? 0,
+			this.config?.subnet ?? 0,
+			this.config?.net ?? 0,
 		)
-		this.artnet.start(this.config.refreshRate ?? 1000)
+		this.artnet.start(this.config?.refreshRate ?? 1000)
 		this.updateStatus(InstanceStatus.Ok)
 
 		// Set initial variable values

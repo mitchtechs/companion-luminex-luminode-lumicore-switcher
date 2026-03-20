@@ -6,6 +6,7 @@ export interface PEGroup {
 }
 
 export interface ModuleConfig {
+	luminode_host: string
 	host: string
 	universe: number
 	subnet: number
@@ -18,12 +19,49 @@ export interface ModuleConfig {
 
 export function GetConfigFields(): SomeCompanionConfigField[] {
 	return [
+		// ── Compatibility Notice ──────────────────────────────────────────────
+		{
+			type: 'static-text',
+			id: 'compat-notice',
+			width: 12,
+			label: 'Hardware Compatibility & How It Works',
+			value: `
+				<strong>Supported devices:</strong> Luminex LumiNode and LumiCore devices running firmware v2.4.0 or later.<br>
+				<strong>How it works:</strong> This module sends Art-Net DMX data to the device's control channel to switch
+				input sources on process engines. The device must have a process engine set to <strong>Switch</strong> mode
+				with Art-Net as the control source.<br>
+				<strong>Important:</strong> This module handles input switching only. For full device control (profiles,
+				monitoring, feedback), also add the <strong>Luminex LumiNode / LumiCore</strong> module for the same device.<br>
+				<strong>Auto-discovery:</strong> If your device appears in the dropdown below, select it. Otherwise enter
+				the IP address manually.
+			`.replace(/\t/g, '').trim(),
+		},
+
+		// ── Auto-discovery ────────────────────────────────────────────────────
+		{
+			type: 'bonjour-device',
+			id: 'luminode_host',
+			label: 'Auto-Discover LumiNode / LumiCore',
+			width: 6,
+			tooltip: 'If your LumiNode or LumiCore is on the same network, it may appear here automatically.',
+		},
+
+		// ── Manual IP ─────────────────────────────────────────────────────────
 		{
 			type: 'textinput',
 			id: 'host',
-			label: 'Target IP',
-			tooltip: 'IP address of the LumiNode/LumiCore device',
+			label: 'Manual IP Address',
+			tooltip: 'IP address of the LumiNode/LumiCore device. Required if auto-discovery is not available.',
 			width: 6,
+			isVisible: (options) => !options['luminode_host'],
+		},
+		{
+			type: 'static-text',
+			id: 'host-filler',
+			width: 6,
+			label: '',
+			value: '',
+			isVisible: (options) => !!options['luminode_host'],
 		},
 		{
 			type: 'number',
