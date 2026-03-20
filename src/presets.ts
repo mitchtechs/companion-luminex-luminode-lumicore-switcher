@@ -5,14 +5,29 @@ import { FeedbackId } from './feedbacks.js'
 import { parseGroups } from './config.js'
 import * as Color from './colors.js'
 
-const INPUT_COLORS: Record<number, number> = {
+const INPUT_EMOJIS = ['1️⃣', '2️⃣', '3️⃣', '4️⃣']
+const INPUT_LABELS = ['Input 1', 'Input 2', 'Input 3', 'Input 4']
+
+const INPUT_BG: Record<number, number> = {
+	1: Color.Input1Bg,
+	2: Color.Input2Bg,
+	3: Color.Input3Bg,
+	4: Color.Input4Bg,
+}
+
+const INPUT_GROUP_BG: Record<number, number> = {
+	1: Color.Input1Group,
+	2: Color.Input2Group,
+	3: Color.Input3Group,
+	4: Color.Input4Group,
+}
+
+const INPUT_FEEDBACK_COLORS: Record<number, number> = {
 	1: Color.Green,
 	2: Color.Blue,
 	3: Color.Orange,
 	4: Color.Purple,
 }
-
-const INPUT_LABELS = ['Input 1', 'Input 2', 'Input 3', 'Input 4']
 
 export function UpdatePresets(self: ModuleInstance): void {
 	const presets: CompanionPresetDefinitions = {}
@@ -29,7 +44,7 @@ export function UpdatePresets(self: ModuleInstance): void {
 			category: `PE ${pe}`,
 			name: `PE ${pe} Current Input`,
 			style: {
-				text: `PE${pe}\\n$(${label}:pe_${pe}_selected_input)`,
+				text: `PE${pe}\\n$(${label}:pe_${pe}_selected_input)\\nStatus`,
 				size: 'auto',
 				color: Color.White,
 				bgcolor: Color.DarkGrey,
@@ -45,10 +60,10 @@ export function UpdatePresets(self: ModuleInstance): void {
 				category: `PE ${pe}`,
 				name: `PE ${pe}: ${INPUT_LABELS[input - 1]}`,
 				style: {
-					text: `PE${pe}\\n${INPUT_LABELS[input - 1]}`,
+					text: `${INPUT_EMOJIS[input - 1]} PE${pe}\\n${INPUT_LABELS[input - 1]}`,
 					size: 'auto',
 					color: Color.White,
-					bgcolor: Color.DarkGrey,
+					bgcolor: INPUT_BG[input],
 				},
 				steps: [
 					{
@@ -65,7 +80,7 @@ export function UpdatePresets(self: ModuleInstance): void {
 					{
 						feedbackId: FeedbackId.SelectedInput,
 						options: { processEngine: pe, input: String(input) },
-						style: { bgcolor: INPUT_COLORS[input], color: Color.White },
+						style: { bgcolor: INPUT_FEEDBACK_COLORS[input], color: Color.White },
 					},
 				],
 			}
@@ -84,7 +99,7 @@ export function UpdatePresets(self: ModuleInstance): void {
 			category: catName,
 			name: `${group.name} Current Input`,
 			style: {
-				text: `${group.name}\\n$(${label}:group_${safeId}_selected_input)`,
+				text: `🔀 ${group.name}\\n$(${label}:group_${safeId}_selected_input)\\nStatus`,
 				size: 'auto',
 				color: Color.White,
 				bgcolor: Color.Teal,
@@ -100,10 +115,10 @@ export function UpdatePresets(self: ModuleInstance): void {
 				category: catName,
 				name: `${group.name}: ${INPUT_LABELS[input - 1]}`,
 				style: {
-					text: `${group.name}\\n${INPUT_LABELS[input - 1]}`,
+					text: `🔀 ${INPUT_EMOJIS[input - 1]}\\n${group.name}\\n${INPUT_LABELS[input - 1]}`,
 					size: 'auto',
 					color: Color.White,
-					bgcolor: Color.DarkGrey,
+					bgcolor: INPUT_GROUP_BG[input],
 				},
 				steps: [
 					{
@@ -120,7 +135,7 @@ export function UpdatePresets(self: ModuleInstance): void {
 					{
 						feedbackId: FeedbackId.GroupSelectedInput,
 						options: { group: group.name, input: String(input) },
-						style: { bgcolor: INPUT_COLORS[input], color: Color.White },
+						style: { bgcolor: INPUT_FEEDBACK_COLORS[input], color: Color.White },
 					},
 				],
 			}
@@ -135,7 +150,7 @@ export function UpdatePresets(self: ModuleInstance): void {
 		category: 'All Engines',
 		name: 'All Engines Status',
 		style: {
-			text: `ALL\\n${numPE} Engines`,
+			text: `📡 ALL\\n${numPE} Engines`,
 			size: 'auto',
 			color: Color.White,
 			bgcolor: Color.DarkGrey,
@@ -151,10 +166,10 @@ export function UpdatePresets(self: ModuleInstance): void {
 			category: 'All Engines',
 			name: `ALL: ${INPUT_LABELS[input - 1]}`,
 			style: {
-				text: `ALL\\n${INPUT_LABELS[input - 1]}`,
+				text: `📡 ${INPUT_EMOJIS[input - 1]}\\nALL\\n${INPUT_LABELS[input - 1]}`,
 				size: 'auto',
 				color: Color.White,
-				bgcolor: Color.DarkGrey,
+				bgcolor: INPUT_BG[input],
 			},
 			steps: [
 				{
@@ -171,7 +186,7 @@ export function UpdatePresets(self: ModuleInstance): void {
 				{
 					feedbackId: FeedbackId.AllSelectedInput,
 					options: { input: String(input) },
-					style: { bgcolor: INPUT_COLORS[input], color: Color.White },
+					style: { bgcolor: INPUT_FEEDBACK_COLORS[input], color: Color.White },
 				},
 			],
 		}

@@ -16,3 +16,15 @@ export const DarkGrey = combineRgb(64, 64, 64)
 export const Cyan = combineRgb(0, 180, 180)
 export const Magenta = combineRgb(180, 0, 180)
 export const Teal = combineRgb(0, 128, 128)
+
+// Input-specific background colours
+export const Input1Bg = combineRgb(0, 80, 0)
+export const Input2Bg = combineRgb(0, 40, 120)
+export const Input3Bg = combineRgb(120, 60, 0)
+export const Input4Bg = combineRgb(80, 0, 80)
+
+// Lighter group switch variants
+export const Input1Group = combineRgb(0, 100, 0)
+export const Input2Group = combineRgb(0, 55, 140)
+export const Input3Group = combineRgb(140, 75, 0)
+export const Input4Group = combineRgb(100, 0, 100)
