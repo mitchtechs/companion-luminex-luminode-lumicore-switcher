@@ -1,5 +1,8 @@
 # Luminex LumiNode / LumiCore Switcher
 
+> Developed by **[PDA Technical Limited](https://pda-tech.com)**
+
+
 This module switches input sources on Luminex LumiNode and LumiCore process engines by sending Art-Net DMX data to the device's control channel.
 
 ## How It Works
