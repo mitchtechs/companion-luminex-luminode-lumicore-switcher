@@ -18,15 +18,19 @@ Developed by **[PDA Technical Limited](https://pda-tech.com)** — Mitch Bailey.
 ## Features
 
 ### Actions
+
 - Switch input source for a specific universe (via Art-Net control channel)
 
 ### Feedbacks
+
 - Current input source per universe
 
 ### Variables
+
 - Active input source per universe
 
 ### Presets
+
 - Pre-built source switching buttons
 
 ---
@@ -39,10 +43,10 @@ This module uses the **Art-Net control channel** built into LumiNode/LumiCore to
 
 ## Configuration
 
-| Field | Description |
-|-------|-------------|
-| Host | IP address of the LumiNode / LumiCore device |
-| Art-Net Universe | The Art-Net universe used for control |
+| Field            | Description                                  |
+| ---------------- | -------------------------------------------- |
+| Host             | IP address of the LumiNode / LumiCore device |
+| Art-Net Universe | The Art-Net universe used for control        |
 
 ---
 

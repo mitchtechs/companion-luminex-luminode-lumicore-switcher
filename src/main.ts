@@ -64,12 +64,7 @@ export class ModuleInstance extends InstanceBase<ModuleConfig> {
 			return
 		}
 
-		this.artnet = new ArtNetSender(
-			host,
-			this.config?.universe ?? 0,
-			this.config?.subnet ?? 0,
-			this.config?.net ?? 0,
-		)
+		this.artnet = new ArtNetSender(host, this.config?.universe ?? 0, this.config?.subnet ?? 0, this.config?.net ?? 0)
 		this.artnet.start(this.config?.refreshRate ?? 1000)
 		this.updateStatus(InstanceStatus.Ok)
 
@@ -101,11 +96,7 @@ export class ModuleInstance extends InstanceBase<ModuleConfig> {
 		// The ArtNet sender auto-refreshes, but we trigger an immediate send
 		// after a value change for responsiveness, then update feedback
 		updateAllVariables(this)
-		this.checkFeedbacks(
-			FeedbackId.SelectedInput,
-			FeedbackId.GroupSelectedInput,
-			FeedbackId.AllSelectedInput,
-		)
+		this.checkFeedbacks(FeedbackId.SelectedInput, FeedbackId.GroupSelectedInput, FeedbackId.AllSelectedInput)
 	}
 }
 

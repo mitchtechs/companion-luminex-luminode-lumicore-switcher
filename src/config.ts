@@ -34,7 +34,9 @@ export function GetConfigFields(): SomeCompanionConfigField[] {
 				monitoring, feedback), also add the <strong>Luminex LumiNode / LumiCore</strong> module for the same device.<br>
 				<strong>Auto-discovery:</strong> If your device appears in the dropdown below, select it. Otherwise enter
 				the IP address manually.
-			`.replace(/\t/g, '').trim(),
+			`
+				.replace(/\t/g, '')
+				.trim(),
 		},
 
 		// ── Auto-discovery ────────────────────────────────────────────────────
